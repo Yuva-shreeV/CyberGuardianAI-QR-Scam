@@ -1,0 +1,831 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+
+    <title>CyberGuardian AI</title>
+
+    <!-- PWA: Installable as a mobile app -->
+    <link rel="manifest" href="manifest.json">
+    <meta name="theme-color" content="#6c63ff">
+    <meta name="mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+    <meta name="apple-mobile-web-app-title" content="CyberGuardian">
+    <link rel="apple-touch-icon" href="icons/icon-192.png">
+    <link rel="icon" type="image/png" sizes="192x192" href="icons/icon-192.png">
+    <link rel="icon" type="image/png" sizes="512x512" href="icons/icon-512.png">
+
+    <!-- SEO / Share description -->
+    <meta name="description" content="AI-powered Payment QR Code Security Scanner. Detect scams before you pay.">
+
+    <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+
+<div class="app-container">
+
+    <!-- =====================================================
+         LOGIN PAGE
+    ====================================================== -->
+
+    <section
+        id="loginPage"
+        class="login-page"
+    >
+
+        <div class="login-logo">
+            🛡️
+        </div>
+
+        <h1>
+            CyberGuardian AI
+        </h1>
+
+        <p class="login-subtitle">
+            Your QR. Your Safety.
+        </p>
+
+        <div class="login-card">
+
+            <h2>
+                Welcome Back
+            </h2>
+
+            <p>
+                Enter your details to continue
+                to CyberGuardian AI.
+            </p>
+
+            <label for="loginName">
+                Name
+            </label>
+
+            <input
+                type="text"
+                id="loginName"
+                placeholder="Enter your name"
+                autocomplete="name"
+            >
+
+            <label for="loginEmail">
+                Email
+            </label>
+
+            <input
+                type="email"
+                id="loginEmail"
+                placeholder="Enter your email"
+                autocomplete="email"
+            >
+
+            <button
+                id="loginButton"
+                class="login-button"
+                type="button"
+            >
+                Continue
+                <span>→</span>
+            </button>
+
+            <p
+                id="loginMessage"
+                class="login-message"
+            ></p>
+
+        </div>
+
+        <p class="login-footer">
+            🔒 Your information is securely stored.
+        </p>
+
+    </section>
+
+
+    <!-- =====================================================
+         MAIN APPLICATION
+    ====================================================== -->
+
+    <section
+        id="appPage"
+        style="display:none;"
+    >
+
+        <!-- =================================================
+             HEADER
+        ================================================== -->
+
+        <header class="header">
+
+            <div class="logo-section">
+
+                <div class="logo">
+                    🛡️
+                </div>
+
+                <div>
+
+                    <h1>
+                        CyberGuardian AI
+                    </h1>
+
+                    <p>
+                        Your QR. Your Safety.
+                    </p>
+
+                </div>
+
+            </div>
+
+            <div class="status">
+
+                <span class="status-dot"></span>
+
+                AI Protected
+
+            </div>
+
+        </header>
+
+
+        <!-- =================================================
+             HOME PAGE
+        ================================================== -->
+
+        <main id="homePage">
+
+            <section class="welcome-section">
+
+                <p class="small-text">
+                    WELCOME BACK
+                </p>
+
+                <h2>
+                    Hello,
+                    <span id="userNameDisplay">
+                        User
+                    </span>
+                    👋
+                </h2>
+
+                <p class="description">
+                    Stay protected from QR-based
+                    scams with intelligent security
+                    analysis.
+                </p>
+
+            </section>
+
+
+            <!-- QR SCANNER -->
+
+            <section
+                class="scanner-card"
+                id="scannerCard"
+            >
+
+                <div class="scanner-icon">
+                    📷
+                </div>
+
+                <h3>
+                    Scan a QR Code
+                </h3>
+
+                <p>
+                    Scan a QR code using your camera
+                    and let CyberGuardian AI analyze
+                    its security risk.
+                </p>
+
+                <button
+                    id="scanButton"
+                    type="button"
+                >
+                    Start Camera Scan
+                    <span>→</span>
+                </button>
+
+
+                <!-- RESULT -->
+
+                <div
+                    id="resultCard"
+                    class="result-card"
+                    style="display:none;"
+                >
+
+                    <h2 id="resultTitle"></h2>
+
+                    <p>
+                        <strong>
+                            Confidence:
+                        </strong>
+
+                        <span id="confidence"></span>%
+                    </p>
+
+                    <p>
+                        <strong>
+                            Payment QR / UPI Content:
+                        </strong>
+
+                        <br>
+
+                        <span id="scannedURL" style="word-break: break-all;"></span>
+                    </p>
+
+
+                    <div class="result-score">
+
+                        <span>
+                            Safety Score
+                        </span>
+
+                        <strong id="safetyScore">
+                            -
+                        </strong>
+
+                    </div>
+
+
+                    <div class="result-risk">
+
+                        <span>
+                            Risk Level
+                        </span>
+
+                        <strong id="riskLevel">
+                            -
+                        </strong>
+
+                    </div>
+
+
+                    <p id="resultMessage"></p>
+
+
+                    <div
+                        id="riskFactors"
+                        class="risk-factors"
+                    ></div>
+
+
+                    <button
+                        id="scanAgainButton"
+                        type="button"
+                    >
+                        Scan Again
+                    </button>
+
+                </div>
+
+
+                <p class="privacy-note">
+                    🔒 Your camera is used only
+                    for QR scanning.
+                </p>
+
+            </section>
+
+
+            <!-- CYBER SAFETY -->
+
+            <section class="safety-card">
+
+                <div>
+
+                    <p class="card-label">
+                        YOUR CYBER SAFETY
+                    </p>
+
+                    <h3>
+                        Stay Protected
+                    </h3>
+
+                    <p>
+                        Scan suspicious QR codes
+                        before opening their destination.
+                    </p>
+
+                </div>
+
+                <div class="shield-circle">
+                    🛡️
+                </div>
+
+            </section>
+
+
+            <!-- FEATURES -->
+
+            <section class="features">
+
+                <div class="feature-card">
+
+                    <span>🤖</span>
+
+                    <h4>
+                        AI Analysis
+                    </h4>
+
+                    <p>
+                        Machine learning analyzes
+                        QR destinations for suspicious
+                        characteristics.
+                    </p>
+
+                </div>
+
+
+                <div class="feature-card">
+
+                    <span>🔍</span>
+
+                    <h4>
+                        Explainable AI
+                    </h4>
+
+                    <p>
+                        Understand the factors that
+                        influence the security prediction.
+                    </p>
+
+                </div>
+
+
+                <div class="feature-card">
+
+                    <span>💳</span>
+
+                    <h4>
+                        Payment QR Defense
+                    </h4>
+
+                    <p>
+                        Detect malicious QR redirection,
+                        tampering, and scam patterns.
+                    </p>
+
+                </div>
+
+
+                <div class="feature-card">
+
+                    <span>⚡</span>
+
+                    <h4>
+                        Instant Decision
+                    </h4>
+
+                    <p>
+                        Receive a clear risk assessment
+                        before visiting the destination.
+                    </p>
+
+                </div>
+
+            </section>
+
+        </main>
+
+
+        <!-- =================================================
+             HISTORY PAGE
+        ================================================== -->
+
+        <section
+            id="historySection"
+            style="display:none;"
+        >
+
+            <div class="welcome-section">
+
+                <p class="small-text">
+                    YOUR ACTIVITY
+                </p>
+
+                <h2>
+                    Scan History
+                </h2>
+
+                <p class="description">
+                    View and manage your previous
+                    QR security scans.
+                </p>
+
+            </div>
+
+            <div class="clear-history-container" style="padding: 0 10px;">
+                <button class="clear-history-btn" type="button" onclick="clearAllHistory()">
+                    🗑️ Clear History
+                </button>
+            </div>
+
+            <div id="historyList">
+
+                <p style="text-align:center;padding:30px;">
+                    Loading history...
+                </p>
+
+            </div>
+
+        </section>
+
+
+        <!-- =================================================
+             ABOUT PAGE
+        ================================================== -->
+
+        <section
+            id="aboutSection"
+            style="display:none;"
+        >
+
+            <div class="welcome-section">
+
+                <p class="small-text">
+                    ABOUT THE PROJECT
+                </p>
+
+                <h2>
+                    CyberGuardian AI
+                </h2>
+
+                <p class="description">
+                    An intelligent QR security assistant
+                    designed to identify potentially
+                    dangerous QR destinations.
+                </p>
+
+            </div>
+
+
+            <div class="about-card">
+
+                <div class="about-icon">
+                    🛡️
+                </div>
+
+                <h3>
+                    What is CyberGuardian AI?
+                </h3>
+
+                <p>
+                    CyberGuardian AI analyzes the destination
+                    hidden inside a QR code and predicts whether
+                    it is safe or potentially phishing. For UPI
+                    payment QR codes, it also checks payment
+                    details and highlights security risks before
+                    you pay.
+                </p>
+
+            </div>
+
+
+            <div class="about-card">
+
+                <div class="about-icon">
+                    🤖
+                </div>
+
+                <h3>
+                    Machine Learning
+                </h3>
+
+                <p>
+                    Machine learning techniques are used to
+                    analyze URL characteristics and classify
+                    potentially malicious destinations.
+                </p>
+
+            </div>
+
+
+            <div class="about-card">
+
+                <div class="about-icon">
+                    🔍
+                </div>
+
+                <h3>
+                    Explainable AI
+                </h3>
+
+                <p>
+                    Explainable AI helps provide understandable
+                    reasons behind the security prediction.
+                </p>
+
+            </div>
+
+
+            <div class="about-card">
+
+                <h3>
+                    Key Features
+                </h3>
+
+                <div class="about-feature">
+                    📷 QR Code Scanning
+                </div>
+
+                <div class="about-feature">
+                    🤖 Machine Learning Detection
+                </div>
+
+                <div class="about-feature">
+                    📊 Risk Assessment
+                </div>
+
+                <div class="about-feature">
+                    🔍 Explainable AI
+                </div>
+
+                <div class="about-feature">
+                    🗂️ Scan History
+                </div>
+
+                <div class="about-feature">
+                    💳 UPI Payment Protection
+                </div>
+
+            </div>
+
+
+            <div class="about-card">
+
+                <h3>
+                    Account
+                </h3>
+
+                <p>
+                    You are currently signed in
+                    to CyberGuardian AI.
+                </p>
+
+                <button
+                    id="logoutButton"
+                    class="logout-button"
+                    type="button"
+                    onclick="logoutUser()"
+                >
+                    🚪 Logout
+                </button>
+
+            </div>
+
+        </section>
+
+
+        <!-- =================================================
+             CAMERA SCANNER MODAL
+        ================================================== -->
+
+        <div
+            id="scannerModal"
+            class="scanner-modal"
+        >
+
+            <div class="scanner-window">
+
+                <div class="scanner-header">
+
+                    <div>
+
+                        <h3>
+                            Scan QR Code
+                        </h3>
+
+                        <p>
+                            Point your camera
+                            at a QR code
+                        </p>
+
+                    </div>
+
+                    <button
+                        id="closeScanner"
+                        class="close-scanner"
+                        type="button"
+                    >
+                        ✕
+                    </button>
+
+                </div>
+
+
+                <div class="camera-container">
+
+                    <video
+                        id="cameraVideo"
+                        autoplay
+                        playsinline
+                    ></video>
+
+                    <canvas
+                        id="qrCanvas"
+                        style="display:none;"
+                    ></canvas>
+
+
+                    <div class="scanner-frame">
+
+                        <div class="corner top-left"></div>
+
+                        <div class="corner top-right"></div>
+
+                        <div class="corner bottom-left"></div>
+
+                        <div class="corner bottom-right"></div>
+
+                        <div class="scan-line"></div>
+
+                    </div>
+
+                </div>
+
+
+                <div class="scanner-status">
+
+                    <div class="camera-status-dot"></div>
+
+                    <span id="scannerStatus">
+                        Searching for QR code...
+                    </span>
+
+                </div>
+
+            </div>
+
+        </div>
+
+
+        <!-- =================================================
+             CYBERGUARDIAN CHATBOT
+        ================================================== -->
+
+        <button
+            id="chatbotToggle"
+            type="button"
+            aria-label="Open CyberGuardian AI chatbot"
+            onclick="toggleCyberChat()"
+        >
+            🤖
+        </button>
+
+
+        <div
+            id="chatbotPanel"
+            aria-label="CyberGuardian AI chatbot"
+        >
+
+            <div class="chatbot-header">
+
+                <div class="chatbot-title">
+
+                    <div class="chatbot-avatar">
+                        🤖
+                    </div>
+
+                    <div>
+
+                        <h3>
+                            CyberGuardian AI
+                        </h3>
+
+                        <p>
+                            Cyber safety assistant
+                        </p>
+
+                    </div>
+
+                </div>
+
+
+                <button
+                    id="chatbotClose"
+                    type="button"
+                    onclick="closeCyberChat()"
+                >
+                    ×
+                </button>
+
+            </div>
+
+            <div class="chat-suggestions">
+                <button type="button" class="chat-chip" onclick="askQuickPrompt('Why is this scan risky?')">Why is this scan risky?</button>
+                <button type="button" class="chat-chip" onclick="askQuickPrompt('Do I need UPI PIN to receive money?')">PIN to receive money?</button>
+                <button type="button" class="chat-chip" onclick="askQuickPrompt('How do refund scams work?')">Refund scams</button>
+                <button type="button" class="chat-chip" onclick="askQuickPrompt('What does Safety Score mean?')">Safety Score?</button>
+            </div>
+
+            <div id="chatMessages">
+
+                <div class="chat-message bot">
+                    Hi! I can help you understand QR scams,
+                    UPI payment safety, suspicious links,
+                    and safe payment practices.
+                </div>
+
+            </div>
+
+
+            <div class="chatbot-input-area">
+
+                <input
+                    id="chatInput"
+                    type="text"
+                    placeholder="Ask about a QR or payment..."
+                    autocomplete="off"
+                >
+
+                <button
+                    id="chatbotSend"
+                    type="button"
+                    onclick="sendCyberChat()"
+                >
+                    ➤
+                </button>
+
+            </div>
+
+        </div>
+
+
+        <!-- =================================================
+             BOTTOM NAVIGATION
+        ================================================== -->
+
+        <nav class="bottom-nav">
+
+            <button
+                class="nav-item active"
+                data-page="home"
+                type="button"
+            >
+                <span>🏠</span>
+                <small>Home</small>
+            </button>
+
+
+            <button
+                class="nav-item"
+                data-page="scan"
+                type="button"
+            >
+                <span>📷</span>
+                <small>Scan</small>
+            </button>
+
+
+            <button
+                class="nav-item"
+                data-page="history"
+                type="button"
+            >
+                <span>📊</span>
+                <small>History</small>
+            </button>
+
+
+            <button
+                class="nav-item"
+                data-page="about"
+                type="button"
+            >
+                <span>ℹ️</span>
+                <small>About</small>
+            </button>
+
+        </nav>
+
+    </section>
+
+</div>
+
+
+<!-- =====================================================
+     QR LIBRARY
+====================================================== -->
+
+<script
+    src="https://cdn.jsdelivr.net/npm/jsqr@1.4.0/dist/jsQR.js"
+></script>
+
+
+<!-- =====================================================
+     MAIN JAVASCRIPT
+====================================================== -->
+
+<script
+    src="script.js"
+></script>
+
+
+</body>
+</html>
